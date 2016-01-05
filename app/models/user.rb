@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	default_scope { order('created_at ASC') }
+	scope :admin_list,  -> { where(admin: true) }
+
 	attr_accessor :remember_token
 	before_save { email.downcase! }
 	validates :name, presence: true, length: { maximum: 50 }
